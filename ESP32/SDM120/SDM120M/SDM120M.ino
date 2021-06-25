@@ -10,22 +10,15 @@
 #define regFrecuencia 0x00CC
 #define regTHD 0x0024
 
-//Pines para cambiar de modo al max485
-#define MAX485_DE_RE 32
 
 // Objeto modbus maestro.
 ModbusMaster node;    
 
 void setup() {
 	Serial.begin(9600);   // Inicio puerto serie debug.
-  Serial2.begin(9600,SERIAL_8N1,16,17);  //Inicio puerto serie modbus 8bits sin paridad 1 bit de parada (8n1) RX TX
-  pinMode(MAX485_DE_RE, OUTPUT); //Habilito los pines del max485 para poder cambiar de enviar a recibir datos
-  digitalWrite(MAX485_DE_RE, 0); //Lo pongo a recibir datos por defecto
-	node.begin(1, Serial2); // La comunicación será con la dirección 0x01 a través del puerto serie2.
+  Serial1.begin(2400,SERIAL_8N1,3,1);  //Inicio puerto serie modbus, velocidad 2400, 8bits sin paridad 1 bit de parada (8n1) RX TX. Valores por defecto del SDM120
+	node.begin(1, Serial1); // La comunicación será con la dirección 0x01 a través del puerto serie1.
 
-  // Callbacks allow us to configure the RS485 transceiver correctly
-  node.preTransmission(preTransmission);
-  node.postTransmission(postTransmission);
 }
 
 void loop() {
@@ -34,18 +27,6 @@ void loop() {
 }
 
 //Funciones
-void preTransmission()
-{
-
-  digitalWrite(MAX485_DE_RE, 1);
-  delay(20);
-}
-
-void postTransmission()
-{
-  digitalWrite(MAX485_DE_RE, 0);
-  delay(20);
-}
 
 float leerRegistro(uint16_t registro){
   //Por defecto leemos 2 registros ya que los CPA de CarloGavazzi devuelven 32bits LSW MSW
@@ -71,7 +52,7 @@ float leerRegistro(uint16_t registro){
         break;
 
       case regCorriente:
-        resultado = valorConSigno/100000.0; //Viene en mA por defecto
+        resultado = valorConSigno/100.0;
         break;
 
       case regPotenciaActiva:
