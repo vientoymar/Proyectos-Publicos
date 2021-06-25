@@ -1,14 +1,14 @@
 #include <ModbusMaster.h> //ModbusMaster by Doc Walker Version 2.0.1
 
 //Registros
-#define regTension 0x00C0
-#define regCorriente 0x00C2
-#define regPotenciaActiva 0x00C4   
-#define regPotenciaReactiva 0x00C6
-#define regPotenciaAparente 0x00C8
-#define regFactorPotencia 0x00CA
+#define regTension 0x0000
+#define regCorriente 0x0006
+#define regPotenciaActiva 0x000C   
+#define regPotenciaReactiva 0x0018
+#define regPotenciaAparente 0x0012
+#define regFactorPotencia 0x001E
 #define regFrecuencia 0x00CC
-#define regTHD 0x00CE
+#define regTHD 0x0024
 
 //Pines para cambiar de modo al max485
 #define MAX485_DE_RE 32
