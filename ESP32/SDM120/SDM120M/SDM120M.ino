@@ -1,14 +1,14 @@
 #include <ModbusMaster.h> //ModbusMaster by Doc Walker Version 2.0.1
 
 //Registros
-#define regTension 0x0000
-#define regCorriente 0x0006
-#define regPotenciaActiva 0x000C   
-#define regPotenciaReactiva 0x0018
-#define regPotenciaAparente 0x0012
-#define regFactorPotencia 0x001E
-#define regFrecuencia 0x00CC
-#define regTHD 0x0024
+#define regTension 0x30001
+#define regCorriente 0x30017
+#define regPotenciaActiva 0x30013 
+#define regPotenciaReactiva 0x30025
+#define regPotenciaAparente 0x30019
+#define regFactorPotencia 0x30031
+#define regFrecuencia 0x30071
+#define regTHD 0x30343
 
 
 // Objeto modbus maestro.
